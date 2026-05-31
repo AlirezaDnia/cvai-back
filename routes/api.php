@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResumeController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ResumeController::class, 'store']);
         // Route::put('/{resume}', [ResumeController::class, 'update']);
     });
+
+    Route::post('/resumes/{resume}/optimize', [AIController::class, 'optimize']);
 });
