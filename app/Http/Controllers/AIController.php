@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resume;
 use App\Actions\Resume\OptimizeResumeAction;
-use Illuminate\Http\Request;
+use App\Models\Resume;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AIController extends Controller
 {
     public function optimize(Request $request, Resume $resume, OptimizeResumeAction $optimizeAction): JsonResponse
     {
-        $this->authorize('update', $resume);
+        Gate::authorize('update', $resume);
 
         $validated = $request->validate([
             'target_job' => 'required|string|max:255',
