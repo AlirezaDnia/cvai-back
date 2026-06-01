@@ -7,17 +7,16 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterUserAction
 {
-    public function execute(array $data): array
+    public function __invoke(array $data): array
     {
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'customer', // به صورت پیش‌فرض همه کستمر هستند
+            'role' => 'customer',
             'plan_type' => 'free'
         ]);
 
-        // ایجاد توکن Sanctum برای کاربر
         $token = $user->createToken('cvai_auth_token')->plainTextToken;
 
         return [

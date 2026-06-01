@@ -18,13 +18,13 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        $result = $registerAction->execute($validated);
+        $result = $registerAction($validated);
 
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $result['user'],
             'token' => $result['token']
-        ], 21);
+        ], 201);
     }
 
     public function login(Request $request): JsonResponse
